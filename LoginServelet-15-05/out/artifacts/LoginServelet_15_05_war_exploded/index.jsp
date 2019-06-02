@@ -1,4 +1,4 @@
-<%@ page import="entity.Student" %>
+<%@ page import="entity.student.Student" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Calendar" %><%--
@@ -32,6 +32,20 @@
 %>
 <body>
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/subject">Subject</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/subject">Subject <span class="sr-only">(current)</span></a>
+
+    </div>
+  </div>
+</nav>
+
+<div>
 <h1>List of Student</h1>
 
 <table class="table table-sm" width="80%" >
