@@ -6,7 +6,7 @@
     
     <servlet>
         <servlet-name>LoginController</servlet-name>
-        <servlet-class>controller.LoginController</servlet-class>
+        <servlet-class>controller.student.LoginController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -15,7 +15,7 @@
     
     <servlet>
         <servlet-name>RegisterController</servlet-name>
-        <servlet-class>controller.RegisterController</servlet-class>
+        <servlet-class>controller.student.RegisterController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
@@ -23,7 +23,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>EditController</servlet-name>
-        <servlet-class>controller.EditController</servlet-class>
+        <servlet-class>controller.student.EditController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EditController</servlet-name>
@@ -31,7 +31,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>DetailsController</servlet-name>
-        <servlet-class>controller.DetailsController</servlet-class>
+        <servlet-class>controller.student.DetailsController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DetailsController</servlet-name>
@@ -39,14 +39,29 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>DeleteController</servlet-name>
-        <servlet-class>controller.DeleteController</servlet-class>
+        <servlet-class>controller.student.DeleteController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DeleteController</servlet-name>
         <url-pattern>/delete</url-pattern>
     </servlet-mapping>
 
-
+    <servlet>
+        <servlet-name>SubjectRegisterController</servlet-name>
+        <servlet-class>controller.subject.RegisterSubjectController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SubjectRegisterController</servlet-name>
+        <url-pattern>/subject/register</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SubjectListController</servlet-name>
+        <servlet-class>controller.subject.ListSubjectController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SubjectListController</servlet-name>
+        <url-pattern>/subject</url-pattern>
+    </servlet-mapping>
 
     <filter>
         <filter-name>Logged</filter-name>

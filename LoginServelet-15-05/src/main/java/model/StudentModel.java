@@ -1,27 +1,34 @@
 package model;
 
-import entity.Student;
+import entity.student.Student;
+import model.connector.ConnectionHelper;
+import util.SqlQuery;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class StudentModel {
-    Connection connection;
-    private void initConnection(){
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/student_manager_information?user=root&password=");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+public class StudentModel{
+//    Connection connection;
+//
+//    private void initConnection(){
+//        try {
+//            connection = DriverManager.getConnection("jdbc:mysql://localhost/student_manager_information?user=root&password=");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
+
 
     public ArrayList<Student> findAll(){
-        initConnection();
+
+        //initConnection();
         ArrayList<Student> arrayList = new ArrayList<Student>();
 
         try {
 
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from student_information");
+            PreparedStatement preparedStatement = ConnectionHelper.getConnection().prepareStatement(SqlQuery.FINDALL);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
 
@@ -50,16 +57,19 @@ public class StudentModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return arrayList;
     }
 
     public boolean checkLogin(String username,String password){
-        initConnection();
+
+        //initConnection();
+
         try {
             System.out.println("Check Login ;" + username);
             System.out.println("Check Login ;" + password);
 
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from user where username = ? and password = ?");
+            PreparedStatement preparedStatement = ConnectionHelper.getConnection().prepareStatement(SqlQuery.CHECK_LOGIN);
             preparedStatement.setString(1,username);
             preparedStatement.setString(2,password);
             ResultSet rs = preparedStatement.executeQuery();
@@ -69,19 +79,23 @@ public class StudentModel {
                 System.out.println(rs.getString(3));
                 return true;
             }
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
 
         return false;
     }
 
     public Student findByID(String rollnumber){
-        initConnection();
+       //initConnection();
 
         try {
 
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from student_information where rollNumber = ?");
+            PreparedStatement preparedStatement = ConnectionHelper.getConnection().prepareStatement(SqlQuery.FIND_BY_ID);
             preparedStatement.setString(1,rollnumber);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
@@ -98,28 +112,31 @@ public class StudentModel {
 
                 return student;
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 
     public boolean update(Student student){
-        initConnection();
+        //initConnection();
         try{
-            PreparedStatement preparedStatement = connection.prepareStatement("" +
-                    "update student_information " +
-                    "set " +
-                        "fullname = ? ," +
-                        "dob = ?," +
-                        "address = ? ," +
-                        "iDCardNumber = ? ," +
-                        "phoneNumber = ? ," +
-                        "gender = ? ," +
-                        "email = ? ," +
-                        "status = ? ," +
-                        " mediumScore = ?" +
-                    " where rollnumber = ?");
+//            " +
+//            "update student_information " +
+//                    "set " +
+//                    "fullname = ? ," +
+//                    "dob = ?," +
+//                    "address = ? ," +
+//                    "iDCardNumber = ? ," +
+//                    "phoneNumber = ? ," +
+//                    "gender = ? ," +
+//                    "email = ? ," +
+//                    "status = ? ," +
+//                    " mediumScore = ?" +
+//                    " where rollnumber = ?"
+            PreparedStatement preparedStatement = ConnectionHelper.getConnection().prepareStatement(SqlQuery.UPDATE);
             preparedStatement.setString(1,student.getFullname());
             preparedStatement.setDate(2,Date.valueOf(student.getDob()));
             preparedStatement.setString(3,student.getAddress());
@@ -135,38 +152,41 @@ public class StudentModel {
                 return false;
             }
 
+
         }catch (Exception ex){
             ex.printStackTrace();
         }
+
 
         return true;
     }
 
     public boolean delete(Student student){
-        initConnection();
+        //initConnection();
         PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = connection.prepareStatement("update student_information set status = ? where rollnumber = ?");
+            preparedStatement = ConnectionHelper.getConnection().prepareStatement(SqlQuery.STUDENT_DELETE);
             preparedStatement.setInt(1,0);
             preparedStatement.setString(2,student.getRollnumber());
             int cout = preparedStatement.executeUpdate();
             if (cout == 0){
                 return false;
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
         return true;
     }
 
     public boolean register(Student student){
-        initConnection();
+//        initConnection();
 
         try {
 
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into student_information(rollnumber," +
-                    "fullname,dob,address,iDCardNumber,phoneNumber,gender,email,status) values (?,?,?,?,?,?,?,?,?)");
+            PreparedStatement preparedStatement = ConnectionHelper.getConnection().prepareStatement(SqlQuery.STUDENT_REGISTER);
             preparedStatement.setString(1,student.getRollnumber());
             preparedStatement.setString(2,student.getFullname());
             preparedStatement.setDate(3,Date.valueOf(student.getDob()) );
@@ -179,9 +199,11 @@ public class StudentModel {
             preparedStatement.execute();
             return true;
 
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return false;
     }
 }

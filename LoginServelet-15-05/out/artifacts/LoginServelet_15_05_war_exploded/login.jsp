@@ -9,9 +9,15 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+
 </head>
 <body>
-<div>
+
+<div class="wrap-form-login">
+    <div class="wrap-title">
+        <h3 class="title">Login</h3>
+    </div>
     <form action="/login" method="post">
         <div>
             Username : <input type="text" name="username">
